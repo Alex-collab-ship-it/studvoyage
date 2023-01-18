@@ -1,13 +1,84 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+
+@font-face {
+  font-family: 'Mont';
+  src: url('https://resource.studvoyage.ru/Mont-Bold.eot');
+  src: local('Mont Bold'), local('Mont-Bold'),
+      url('https://resource.studvoyage.ru/Mont-Bold.eot?#iefix') format('embedded-opentype'),
+      url('https://resource.studvoyage.ru/Mont-Bold.woff2') format('woff2'),
+      url('https://resource.studvoyage.ru/Mont-Bold.woff') format('woff'),
+      url('https://resource.studvoyage.ru/Mont-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
 }
 
-code {
+@font-face {
+  font-family: 'Mont';
+  src: url('https://resource.studvoyage.ru/Mont-SemiBold.eot');
+  src: local('Mont SemiBold'), local('Mont-SemiBold'),
+      url('https://resource.studvoyage.ru/Mont-SemiBold.eot?#iefix') format('embedded-opentype'),
+      url('https://resource.studvoyage.ru/Mont-SemiBold.woff2') format('woff2'),
+      url('https://resource.studvoyage.ru/Mont-SemiBold.woff') format('woff'),
+      url('https://resource.studvoyage.ru/Mont-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mont';
+  src: url('https://resource.studvoyage.ru/Mont-Regular.eot');
+  src: local('Mont Regular'), local('Mont-Regular'),
+      url('https://resource.studvoyage.ru/Mont-Regular.eot?#iefix') format('embedded-opentype'),
+      url('https://resource.studvoyage.ru/Mont-Regular.woff2') format('woff2'),
+      url('https://resource.studvoyage.ru/Mont-Regular.woff') format('woff'),
+      url('https://resource.studvoyage.ru/Mont-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mont';
+  src: url('https://resource.studvoyage.ru/Mont-Light.eot');
+  src: local('Mont Light'), local('Mont-Light'),
+      url('https://resource.studvoyage.ru/Mont-Light.eot?#iefix') format('embedded-opentype'),
+      url('https://resource.studvoyage.ru/Mont-Light.woff2') format('woff2'),
+      url('https://resource.studvoyage.ru/Mont-Light.woff') format('woff'),
+      url('https://resource.studvoyage.ru/Mont-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+body {
+  margin: 0;
+  font-family: 'Mont',
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif; */
+  /* -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+}
+
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+
+a {
+  color: #1A7BD3;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+  padding: 0
+}
+
+input {
+  outline: none;
+}
+button {
+  outline: none;
+  border-width: 0;
 }

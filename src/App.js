@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
+import { Stack } from 'react-bootstrap';
+import CONSTANTS from './bootstrap';
+import { MainScreen } from './screens/MainScreen';
+import { Footer } from './pages/components/Footer';
+import { AuthScreen } from './screens/AuthScreen';
+import { Route, Routes } from 'react-router-dom';
+import { HomePage } from './pages/Home';
 
 function App() {
+  let access_token = CONSTANTS.cookie.get('access_token')
+  const [isLoggedIn,setIsLoggedIn] = useState(access_token !== undefined)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Stack style={{ minHeight: '100vh', }}>
+      <div className="container-fluid px-sm-5 px-2 pt-4 pb-4 align-items-center" style={{ width: '100%', height: '100%' }}>
+        <Routes>
+          <Route path='/' element={ <HomePage  isLoggedIn={isLoggedIn} /> }/>
+          <Route path='tours/*' element={<MainScreen access_token={access_token} setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path='auth/*' element={<AuthScreen setIsLoggedIn={setIsLoggedIn} />} />
+        </Routes>
+      </div>
+      <Footer />
+    </Stack>
+  )
+
+
+
+
 }
+
 
 export default App;

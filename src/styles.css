@@ -1,0 +1,15 @@
+@font-face {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+  
+    /* Браузер сначала попробует найти шрифт локально */
+    src: local("Mont"),
+         /* Если не получилось, загрузит woff2 */
+         url("/public/fonts/Mont-Regular.ttf") format("ttf")
+  }
+
+* {
+    font-family: 'Mont';
+
+}
