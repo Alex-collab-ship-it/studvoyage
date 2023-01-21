@@ -72,6 +72,8 @@ const Tours = ({access_token}) => {
                 console.log(error)
             });
     }, localState)
+
+
     if (!localState.loaded)
         return <Loader />
 
@@ -110,17 +112,14 @@ const MyTour = ({book}) => {
                 console.log(error)
             });
     }, tour)
-
-    // const navigate = useNavigate()
-
+    const navigate = useNavigate()
     if (!tour.loaded) return <Loader />
-    // console.log(book)
     return (
-        <div onClick={() => console.log('тур')} className="d-flex flex-row justify-content-between mh-100 flex-wrap-reverse p-4" style={{ backgroundColor: '#F8F9FF', borderRadius: '15px', minHeight: '150px', cursor: 'pointer' }}>
+        <div onClick={() => navigate('/tours/booking_info', { state: { book: book, data: tour.data } })} className="d-flex flex-row justify-content-between mh-100 flex-wrap-reverse p-4" style={{ backgroundColor: '#F8F9FF', borderRadius: '15px', minHeight: '150px', cursor: 'pointer' }}>
             <div className="d-flex justify-content-center me-2 flex-column">
                 <h1 className="mb-2 text-wrap" style={{fontSize: '21px', fontWeight: '600', color: '#272727', margin: '0'}}>{tour.data.name}</h1>
-                <div className="flex-row">
-                    <p className="mb-2 text-wrap" style={{ margin: '0' }}>
+                <div className="d-flex flex-row flex-wrap mt-1">
+                    <p className="mb-2 me-5 text-wrap" style={{ margin: '0' }}>
                         <img  src={require('../../icons/calendar.svg').default} className='me-2'/>
                         {CONSTANTS.period(tour.data.start_date.split('-'), tour.data.end_date.split('-'))}
                     </p>
@@ -129,9 +128,18 @@ const MyTour = ({book}) => {
                         {book.tourists.length}
                     </p>
                 </div>
+                <div className="d-flex flex-row mt-1">
+                    {book.is_paid ? <>
+                        <img  src={require('../../icons/green_dollar.svg').default} className='me-2'/>
+                        <p style={{ color: '#169C3C' }}>оплачено</p>
+                    </>:<>
+                        <img  src={require('../../icons/red_dollar.svg').default} className='me-2'/>
+                        <p style={{ color: '#F05B5B' }}>не оплачено</p>
+                    </>}
+                </div>
                
             </div>
-            <img alt='' className="d-inline-block mb-2" src={tour.data.image} style={{ width: '90px', height: '90px', borderRadius: '15px'}}></img>
+            <img alt='' className="d-inline-block mb-2" src={tour.data.image} style={{ width: '90px', height: '90px', borderRadius: '15px'}} />
         </div>
     )
 }

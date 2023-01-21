@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import CONSTANTS from "../bootstrap"
 
-export const HomePage = ({ isLoggedIn }) => {
+export const NotFoundPage = () => {
     const navigate = useNavigate()
 
     return(
@@ -14,9 +14,9 @@ export const HomePage = ({ isLoggedIn }) => {
                 </header>
 
                 <div className="px-3 mt-auto">
-                    <p className="mb-5 text-center fs-1" style={{color: '#1A7BD3', fontWeight: '900'}}>Сайт в процессе разработки, но поездки уже доступны</p>
-                    <button onClick={() => navigate(isLoggedIn ? 'tours': 'auth')} style={{ border: '1px solid #1A7BD3'}} className="btn btn-lg fw-bold">
-                        <p style={{ fontWeight: '600', color: '#1A7BD3' }}>Выбрать направление</p></button>
+                    <p className="mb-5 text-center fs-1" style={{color: '#1A7BD3', fontWeight: '900'}}>Такой страницы не сущесвует</p>
+                    <button onClick={() => navigate('/')} style={{ border: '1px solid #1A7BD3'}} className="btn btn-lg fw-bold">
+                        <p style={{ fontWeight: '600', color: '#1A7BD3' }}>На стартовую</p></button>
                 </div>
             </div>
         </div>

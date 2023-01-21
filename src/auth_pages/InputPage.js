@@ -9,9 +9,9 @@ export const InputPage = ({setIsLoggedIn}) =>  {
         hasAccount: false,
         passed_auth: '',
         access_token: '',
-        mail: '',
-        pswd1: '',
-        pswd2: '',
+        mail: '03yrruc03@gmail.com',
+        pswd1: 'qwerty',
+        pswd2: 'qwerty',
         disabled: false, 
         errorMsg: ''
     })

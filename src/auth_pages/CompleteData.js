@@ -25,7 +25,7 @@ export const CompleteData = ({ access_token, setIsLoggedIn}) => {
         <div className="d-flex container-fluid justify-content-center" >
             {data.successMsg !== '' ? <SuccessMsg setState={setData} state={data} />:<></>}
             {data.errorMsg !== '' ? <ErrorMsg setState={setData} state={data} />:<></>}
-            <form className="card my-auto p-4 px-5 mx-auto my-5 rounded-4" style={{maxWidth: '544px', minHeight: '500px'}} onSubmit={e => e.preventDefault()}>
+            <form className="card my-auto px-sm-5 p-3 mx-auto my-5 rounded-4" style={{maxWidth: '544px', minHeight: '500px'}} onSubmit={e => e.preventDefault()}>
                 <h2 className='text-center'>
                     Расскажите о себе ниже
                 </h2>
@@ -69,7 +69,6 @@ export const CompleteData = ({ access_token, setIsLoggedIn}) => {
 }
 
 const submit = (data, setData, access_token,setIsLoggedIn, navigate) => {
-    console.log(data)
     if (data.first_name !== '' && data.last_name !== '' && data.middle_name !== '' && data.university !== '' && data.group !== '' && data.birth_date !== '' && data.phone.indexOf('_')<0 && data.phone.length > 10) {
         fetch(url+'/api/v1/accounts/set',
             {
@@ -92,10 +91,14 @@ const submit = (data, setData, access_token,setIsLoggedIn, navigate) => {
             }
         ).then(response => response.json()).then(r => {
             if (r === 'Данные успешно сохранены' || r === "Аккаунт уже настроен, для изменения данных напишите в службу поддержки - hello@studvoyage.ru"){
+                console.log(1)
                 CONSTANTS.cookie.set('access_token', access_token)
                 navigate('/tours')
                 setIsLoggedIn(true)
-            } else{ setData(prev => ({ ...prev, errorMsg: r})) }
+            } else{ 
+                if (r.detail[0].msg.indexOf('phone') >= 0) setData(prev => ({ ...prev, errorMsg: 'Пользователь с таким номером уже зарегистрирован' }))
+                else setData(prev => ({ ...prev, errorMsg: r.detail[0].msg }))
+            }
         }).catch((error) => {
             console.log(error)
         });

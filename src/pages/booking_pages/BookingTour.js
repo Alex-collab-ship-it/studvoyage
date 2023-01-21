@@ -30,7 +30,6 @@ export const BookingTour = ({ access_token, user }) => {
         checked: false
     })
 
-    // console.log(state.persons)
 
     useEffect(() => {
         fetch(CONSTANTS.url + '/api/v1/tours/'+ data.id,
@@ -48,7 +47,7 @@ export const BookingTour = ({ access_token, user }) => {
                 console.log(error)
             });
         
-    }, state.data)
+    }, [state.data.loaded])
     const addPerson = () => {
         if (state.persons.length < 3) {
             console.log('do', state.persons)
@@ -68,10 +67,6 @@ export const BookingTour = ({ access_token, user }) => {
             } ]}))
         } else setState(p => ({ ...p, errorMsg: 'Максимум 3 человека' }))
     }
-
-    useEffect(() => {
-        console.log('posle',state.persons)
-    })
 
     const requestHandler = () => {
         for(let i = 0; i<state.persons.length;i++){
@@ -148,7 +143,7 @@ export const BookingTour = ({ access_token, user }) => {
                         </div>
                     </div>
                     <hr className="container d-flex flex-row p-0" />
-                    <div className="container d-flex flex-row my-3 p-0">
+                    <div className="container d-flex flex-row mt-3 mb-5 p-0">
                         <p style={{ color: '#8C8C8C', fontSize: '14px'}}>
                             Увы, пока что мы вынуждены оказывать “услуги туристического консультирования”. 
                             Это необходимо для того, чтобы данная поездка была осуществлена на правах агента различных туристических услуг. 
@@ -158,8 +153,8 @@ export const BookingTour = ({ access_token, user }) => {
                     </div>
                 </div>
             </div>
-            <div className="col">
-                <div className="container-fluid d-flex flex-column" style={{ maxWidth: '550px' }}>
+            <div className="col d-flex justify-content-end">
+                <div className="d-flex flex-column mx-sm-5 mx-0" style={{ maxWidth: '550px'}}>
                     <div className="d-flex flex-row justify-content-between py-3 px-4 mb-4" style={{ backgroundColor: '#F8F9FF', borderRadius: '15px', cursor: 'pointer' }}>
                         <div className="d-flex justify-content-center flex-column p-0">
                             <h1 className="mb-2 p-0 m-0" style={{fontSize: '21px', fontWeight: '600', color: '#272727', margin: '0'}}>{data.name}</h1>
@@ -170,7 +165,7 @@ export const BookingTour = ({ access_token, user }) => {
                     <InfoBar data={state.data.segments} />
                     <div className="card rounded-4 p-4">
                         <div className="d-flex flex-row row-gap-3 flex-wrap justify-content-between">
-                            <div className="d-flex flex-column align-items-between">
+                            <div className="d-flex flex-column align-items-between mb-3">
                                 <h3 className="m-0 p-0 mb-1" style={{  minWidth: '150px', fontSize: '22px' }}>Оплата</h3>
                                 <h2 className="m-0 p-0" style={{ fontWeight: '600' }}>{state.data.price} ₽</h2>
                             </div>
@@ -193,7 +188,6 @@ const TravellerForm = ({ person, number, len, setState, user }) => {
 
     const passportRef = createRef()
     const studentpassRef = createRef()
-    console.log(person, number)
     return (
         <form className="card p-4 mb-4 w-100 mx-auto rounded-4" >
             <div className="container-fluid d-flex justify-content-between align-content-center mt-2  mb-4">
@@ -351,15 +345,14 @@ const InfoBar = ({data}) => {
 
 
 const InfoCategory = ({data, category}) => {
-    return (
-        <div className="d-flex flex-column mb-3">
+    return data.length > 0 ? <div className="d-flex flex-column mb-3">
             <h5 className="m-0 p-0 mb-2" style={{ fontWeight: '600',  }}>
                 {cаtegories[category]}
             </h5>
             {Object.keys(data).map((key,i) =>
                 <InfoDetail key={i} data={data[key]}/>)}
-        </div>
-    )
+        </div> : <></>
+    
 }
 
 
@@ -368,7 +361,7 @@ const InfoDetail = ({data}) => {
     let c = data.category
     return c === 'flight' ?  <FlightBlock data={data} /> : 
                 c === 'hotel' ? <HotelBlock data={data} /> : 
-                c === 'transfer' ? <TransferBlock data={data} /> : <InsuranceBlock data={data} />
+                c === 'transfer' ? <TransferBlock data={data} /> : c === 'insurance' ? <InsuranceBlock data={data} /> : <></>
     
 }
 
